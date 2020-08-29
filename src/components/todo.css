@@ -1,0 +1,38 @@
+.todo {
+  width: 20%;
+  margin: 0px auto;
+}
+
+.colorBox {
+  width: 10px;
+  height: 18px;
+  margin: 3px 10px 0px 0px;
+}
+
+.displayTodoItem {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.inputTag {
+  width: 150px;
+}
+
+.content {
+  width: 143px;
+  font-size: 20px;
+  overflow: scroll;
+  cursor: pointer;
+}
+
+.doneColor {
+  background-color: mediumseagreen;
+}
+
+.notDoneColor {
+  background-color: lightblue;
+}
+
+.lineThrough {
+  text-decoration: line-through;
+}
