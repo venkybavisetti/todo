@@ -16,7 +16,7 @@ class InputBox extends React.Component {
   handleKeyPress(event) {
     const content = event.target.value;
     if (event.keyCode === 13 && content !== '') {
-      this.props.handleEnterPress(event.target.value);
+      this.props.createItem(event.target.value);
       this.setState({ value: '' });
     }
   }

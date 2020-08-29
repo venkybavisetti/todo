@@ -6,22 +6,22 @@ import './todo.css';
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { list: [{ content: 'hi hello', isDone: false }] };
+    this.state = { list: [] };
 
-    this.handleEnterPress = this.handleEnterPress.bind(this);
-    this.handleItemClick = this.handleItemClick.bind(this);
+    this.createItem = this.createItem.bind(this);
+    this.updateItem = this.updateItem.bind(this);
   }
 
-  handleEnterPress(content) {
+  createItem(content) {
     this.setState(({ list }) => ({
       list: list.concat({ content, isDone: false }),
     }));
   }
 
-  handleItemClick(itemPlace, status) {
+  updateItem(itemPlace) {
     this.setState(({ list }) => {
-      const newList = list.slice();
-      newList[itemPlace].isDone = status;
+      const newList = list.map((item) => ({ ...item }));
+      newList[itemPlace].isDone = !newList[itemPlace].isDone;
       return { list: newList };
     });
   }
@@ -31,7 +31,7 @@ class Todo extends React.Component {
       <TodoItem
         item={item}
         key={itemPlace}
-        onClick={this.handleItemClick}
+        onClick={this.updateItem}
         itemPlace={itemPlace}
       />
     ));
@@ -40,7 +40,7 @@ class Todo extends React.Component {
       <div className="todo">
         <h1>Todo List</h1>
         {children}
-        <InputBox handleEnterPress={this.handleEnterPress} />
+        <InputBox createItem={this.createItem} />
       </div>
     );
   }

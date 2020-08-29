@@ -7,10 +7,7 @@ const TodoItem = ({ item, onClick, itemPlace }) => {
   return (
     <div className="displayTodoItem">
       <span className={colorBox}></span>
-      <span
-        onClick={() => onClick(itemPlace, !item.isDone)}
-        className={content}
-      >
+      <span onClick={() => onClick(itemPlace)} className={content}>
         {item.content}
       </span>
     </div>
