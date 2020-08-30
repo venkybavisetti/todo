@@ -1,6 +1,6 @@
 import React from 'react';
 import InputBox from './inputBox';
-import TodoItem from './todoItem';
+import TodoTask from './todoTask';
 import './todo.css';
 
 class Todo extends React.Component {
@@ -8,31 +8,31 @@ class Todo extends React.Component {
     super(props);
     this.state = { list: [] };
 
-    this.createItem = this.createItem.bind(this);
-    this.updateItem = this.updateItem.bind(this);
+    this.createTask = this.createTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   }
 
-  createItem(content) {
+  createTask(content) {
     this.setState(({ list }) => ({
       list: list.concat({ content, isDone: false }),
     }));
   }
 
-  updateItem(itemPlace) {
+  updateTask(taskPlace) {
     this.setState(({ list }) => {
-      const newList = list.map((item) => ({ ...item }));
-      newList[itemPlace].isDone = !newList[itemPlace].isDone;
+      const newList = list.map((task) => ({ ...task }));
+      newList[taskPlace].isDone = !newList[taskPlace].isDone;
       return { list: newList };
     });
   }
 
   render() {
-    const children = this.state.list.map((item, itemPlace) => (
-      <TodoItem
-        item={item}
-        key={itemPlace}
-        onClick={this.updateItem}
-        itemPlace={itemPlace}
+    const children = this.state.list.map((task, taskPlace) => (
+      <TodoTask
+        task={task}
+        key={taskPlace}
+        onClick={this.updateTask}
+        taskPlace={taskPlace}
       />
     ));
 
@@ -40,7 +40,7 @@ class Todo extends React.Component {
       <div className="todo">
         <h1>Todo List</h1>
         {children}
-        <InputBox createItem={this.createItem} />
+        <InputBox createTask={this.createTask} />
       </div>
     );
   }
