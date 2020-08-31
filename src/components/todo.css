@@ -26,18 +26,16 @@
   user-select: none;
 }
 
-.doneColor {
+.notDone .statusBox {
+  background-color: lightblue;
+}
+.progress .statusBox {
+  background-color: orange;
+}
+.done .statusBox {
   background-color: mediumseagreen;
 }
 
-.notDoneColor {
-  background-color: lightblue;
-}
-
-.doingColor {
-  background-color: orange;
-}
-
-.lineThrough {
+.done .text {
   text-decoration: line-through;
 }

@@ -1,18 +1,13 @@
 import React from 'react';
 
 const TodoTask = ({ task, onClick }) => {
-  const taskColor = [
-    { textDecoration: 'text', statusBox: 'notDoneColor statusBox' },
-    { textDecoration: 'text', statusBox: 'doingColor statusBox' },
-    { textDecoration: 'text lineThrough', statusBox: 'doneColor statusBox' },
-  ];
-
-  const { textDecoration, statusBox } = taskColor[task.status];
+  const taskColor = ['notDone', 'progress', 'done'];
+  const taskDecoration = taskColor[task.status];
 
   return (
-    <div className="displayTodoTask">
-      <span className={statusBox}></span>
-      <span onClick={() => onClick(task.id)} className={textDecoration}>
+    <div className={`displayTodoTask ${taskDecoration}`}>
+      <span className="statusBox"></span>
+      <span onClick={() => onClick(task.id)} className="text">
         {task.text}
       </span>
     </div>
