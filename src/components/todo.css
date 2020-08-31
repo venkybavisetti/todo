@@ -3,7 +3,7 @@
   margin: 0px auto;
 }
 
-.colorBox {
+.statusBox {
   width: 10px;
   height: 18px;
   margin: 3px 10px 0px 0px;
@@ -18,11 +18,12 @@
   width: 150px;
 }
 
-.content {
+.text {
   width: 143px;
   font-size: 20px;
   overflow: scroll;
   cursor: pointer;
+  user-select: none;
 }
 
 .doneColor {
@@ -31,6 +32,10 @@
 
 .notDoneColor {
   background-color: lightblue;
+}
+
+.doingColor {
+  background-color: orange;
 }
 
 .lineThrough {

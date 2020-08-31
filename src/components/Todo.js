@@ -3,6 +3,15 @@ import InputBox from './inputBox';
 import TodoTask from './todoTask';
 import './todo.css';
 
+const generateId = function () {
+  return Math.floor(Math.random() * Date.now());
+};
+
+const cloneStructure = function (structure) {
+  //JSON.parse(JSON.stringify(structure));
+  return structure.map((task) => ({ ...task }));
+};
+
 class Todo extends React.Component {
   constructor(props) {
     super(props);
@@ -12,28 +21,26 @@ class Todo extends React.Component {
     this.updateTask = this.updateTask.bind(this);
   }
 
-  createTask(content) {
-    this.setState(({ list }) => ({
-      list: list.concat({ content, isDone: false }),
-    }));
+  createTask(text) {
+    this.setState(({ list }) => {
+      const newList = cloneStructure(list);
+      newList.push({ id: generateId(), text, status: 0 });
+      return { list: newList };
+    });
   }
 
-  updateTask(taskPlace) {
+  updateTask(taskId) {
     this.setState(({ list }) => {
-      const newList = list.map((task) => ({ ...task }));
-      newList[taskPlace].isDone = !newList[taskPlace].isDone;
+      const newList = cloneStructure(list);
+      const task = newList.find((task) => task.id === taskId);
+      task.status = (task.status + 1) % 3;
       return { list: newList };
     });
   }
 
   render() {
-    const children = this.state.list.map((task, taskPlace) => (
-      <TodoTask
-        task={task}
-        key={taskPlace}
-        onClick={this.updateTask}
-        taskPlace={taskPlace}
-      />
+    const children = this.state.list.map((task) => (
+      <TodoTask task={task} key={task.id} onClick={this.updateTask} />
     ));
 
     return (
