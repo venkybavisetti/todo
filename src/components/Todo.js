@@ -16,10 +16,11 @@ const cloneStructure = function (structure) {
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { list: [] };
+    this.state = { list: [], header: 'Todo List' };
 
     this.createTask = this.createTask.bind(this);
     this.updateTask = this.updateTask.bind(this);
+    this.updateHeader = this.updateHeader.bind(this);
   }
 
   createTask(text) {
@@ -39,6 +40,10 @@ class Todo extends React.Component {
     });
   }
 
+  updateHeader(header) {
+    this.setState({ header });
+  }
+
   render() {
     const children = this.state.list.map((task) => (
       <TodoTask task={task} key={task.id} onClick={this.updateTask} />
@@ -46,7 +51,7 @@ class Todo extends React.Component {
 
     return (
       <div className="todo">
-        <Header />
+        <Header header={this.state.header} onEnter={this.updateHeader} />
         {children}
         <InputBox onEnter={this.createTask} />
       </div>

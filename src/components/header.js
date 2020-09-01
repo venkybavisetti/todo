@@ -4,14 +4,15 @@ import InputBox from './inputBox';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { header: 'Todo List', onEdit: false };
+    this.state = { onEdit: false };
 
     this.updateHeader = this.updateHeader.bind(this);
     this.editMode = this.editMode.bind(this);
   }
 
   updateHeader(text) {
-    this.setState({ header: text, onEdit: false });
+    this.setState({ onEdit: false });
+    this.props.onEnter(text);
   }
 
   editMode() {
@@ -22,12 +23,12 @@ class Header extends React.Component {
     if (this.state.onEdit)
       return (
         <div className="header">
-          <InputBox onEnter={this.updateHeader} inputText={this.state.header} />
+          <InputBox onEnter={this.updateHeader} inputText={this.props.header} />
         </div>
       );
     return (
       <div onClick={this.editMode} className="header">
-        {this.state.header}
+        {this.props.header}
       </div>
     );
   }
