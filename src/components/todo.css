@@ -16,6 +16,8 @@
 
 .inputTag {
   width: 150px;
+  font-weight: inherit;
+  font-size: inherit;
 }
 
 .text {
@@ -38,4 +40,11 @@
 
 .done .text {
   text-decoration: line-through;
+}
+
+.header {
+  font-weight: 800;
+  margin: 20px 0px;
+  font-size: large;
+  cursor: pointer;
 }

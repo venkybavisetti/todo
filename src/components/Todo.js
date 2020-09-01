@@ -1,6 +1,7 @@
 import React from 'react';
 import InputBox from './inputBox';
 import TodoTask from './todoTask';
+import Header from './header';
 import './todo.css';
 
 const generateId = function () {
@@ -45,9 +46,9 @@ class Todo extends React.Component {
 
     return (
       <div className="todo">
-        <h1>Todo List</h1>
+        <Header />
         {children}
-        <InputBox createTask={this.createTask} />
+        <InputBox onEnter={this.createTask} />
       </div>
     );
   }

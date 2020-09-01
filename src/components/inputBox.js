@@ -3,7 +3,7 @@ import React from 'react';
 class InputBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { text: props.inputText || '' };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -16,7 +16,7 @@ class InputBox extends React.Component {
   handleKeyPress(event) {
     const content = event.target.value;
     if (event.keyCode === 13 && content !== '') {
-      this.props.createTask(event.target.value);
+      this.props.onEnter(event.target.value);
       this.setState({ text: '' });
     }
   }
