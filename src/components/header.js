@@ -11,8 +11,8 @@ class Header extends React.Component {
   }
 
   updateHeader(text) {
-    this.setState({ onEdit: false });
     this.props.onEnter(text);
+    this.setState({ onEdit: false });
   }
 
   editMode() {

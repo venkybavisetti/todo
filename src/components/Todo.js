@@ -21,6 +21,7 @@ class Todo extends React.Component {
     this.createTask = this.createTask.bind(this);
     this.updateTask = this.updateTask.bind(this);
     this.updateHeader = this.updateHeader.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   createTask(text) {
@@ -44,9 +45,23 @@ class Todo extends React.Component {
     this.setState({ header });
   }
 
+  deleteTask(taskId) {
+    this.setState(({ list }) => {
+      const newList = cloneStructure(list);
+      const taskIndex = newList.findIndex((task) => task.id === taskId);
+      newList.splice(taskIndex, 1);
+      return { list: newList };
+    });
+  }
+
   render() {
     const children = this.state.list.map((task) => (
-      <TodoTask task={task} key={task.id} onClick={this.updateTask} />
+      <TodoTask
+        task={task}
+        key={task.id}
+        updateTask={this.updateTask}
+        deleteTask={this.deleteTask}
+      />
     ));
 
     return (

@@ -1,5 +1,5 @@
 .todo {
-  width: 20%;
+  width: 13%;
   margin: 0px auto;
 }
 
@@ -12,16 +12,17 @@
 .displayTodoTask {
   display: flex;
   margin: 10px 0px;
+  position: relative;
 }
 
 .inputTag {
-  width: 150px;
+  width: 180px;
   font-weight: inherit;
   font-size: inherit;
 }
 
 .text {
-  width: 143px;
+  width: 153px;
   font-size: 20px;
   overflow: scroll;
   cursor: pointer;
@@ -47,4 +48,19 @@
   margin: 20px 0px;
   font-size: large;
   cursor: pointer;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  color: gray;
+  font-weight: 700;
+  margin: 3px 0px;
+  display: none;
+  cursor: pointer;
+}
+
+.displayTodoTask:hover .deleteBtn {
+  display: block;
 }
