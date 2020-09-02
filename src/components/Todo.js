@@ -2,8 +2,8 @@ import React from 'react';
 import InputBox from './InputBox';
 import TodoTask from './TodoTask';
 import Header from './Header';
-import { getNextStatus, getDefaultStatus } from './statuses';
-import './todo.css';
+import { getNextStatus, getDefaultStatus } from '../statuses';
+import '../todo.css';
 
 const generateId = function () {
   return Math.floor(Math.random() * Date.now());

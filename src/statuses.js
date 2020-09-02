@@ -12,4 +12,4 @@ const getNextStatus = (currentStatus) => toggle[currentStatus];
 
 const getDefaultStatus = () => TODO;
 
-module.exports = { getNextStatus, getDefaultStatus };
+export { getNextStatus, getDefaultStatus };
