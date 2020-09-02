@@ -1,5 +1,5 @@
 import React from 'react';
-import InputBox from './inputBox';
+import InputBox from './InputBox';
 
 class Header extends React.Component {
   constructor(props) {

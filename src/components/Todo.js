@@ -1,7 +1,8 @@
 import React from 'react';
-import InputBox from './inputBox';
-import TodoTask from './todoTask';
-import Header from './header';
+import InputBox from './InputBox';
+import TodoTask from './TodoTask';
+import Header from './Header';
+import { getNextStatus, getDefaultStatus } from './statuses';
 import './todo.css';
 
 const generateId = function () {
@@ -27,7 +28,7 @@ class Todo extends React.Component {
   createTask(text) {
     this.setState(({ list }) => {
       const newList = cloneStructure(list);
-      newList.push({ id: generateId(), text, status: 0 });
+      newList.push({ id: generateId(), text, status: getDefaultStatus() });
       return { list: newList };
     });
   }
@@ -36,7 +37,7 @@ class Todo extends React.Component {
     this.setState(({ list }) => {
       const newList = cloneStructure(list);
       const task = newList.find((task) => task.id === taskId);
-      task.status = (task.status + 1) % 3;
+      task.status = getNextStatus(task.status);
       return { list: newList };
     });
   }
@@ -65,7 +66,7 @@ class Todo extends React.Component {
     ));
 
     return (
-      <div className="todo">
+      <div className="todoBox">
         <Header header={this.state.header} onEnter={this.updateHeader} />
         {children}
         <InputBox onEnter={this.createTask} />

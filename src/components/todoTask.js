@@ -1,11 +1,8 @@
 import React from 'react';
 
 const TodoTask = ({ task, updateTask, deleteTask }) => {
-  const taskColor = ['notDone', 'progress', 'done'];
-  const taskDecoration = taskColor[task.status];
-
   return (
-    <div className={`displayTodoTask ${taskDecoration}`}>
+    <div className={`displayTodoTask ${task.status}`}>
       <span className="statusBox"></span>
       <span onClick={() => updateTask(task.id)} className="text">
         {task.text}

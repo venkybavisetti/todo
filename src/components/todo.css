@@ -1,4 +1,4 @@
-.todo {
+.todoBox {
   width: 13%;
   margin: 0px auto;
 }
@@ -29,10 +29,10 @@
   user-select: none;
 }
 
-.notDone .statusBox {
+.todo .statusBox {
   background-color: lightblue;
 }
-.progress .statusBox {
+.doing .statusBox {
   background-color: orange;
 }
 .done .statusBox {
