@@ -27,8 +27,11 @@ class Header extends React.Component {
         </div>
       );
     return (
-      <div onClick={this.editMode} className="header">
-        {this.props.header}
+      <div className="header">
+        <span onClick={this.editMode}>{this.props.header}</span>
+        <div className="deleteBtn" onClick={this.props.deleteTasks}>
+          X
+        </div>
       </div>
     );
   }

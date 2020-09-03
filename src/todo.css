@@ -48,6 +48,8 @@
   margin: 20px 0px;
   font-size: large;
   cursor: pointer;
+  position: relative;
+  width: 100%;
 }
 
 .deleteBtn {
@@ -62,5 +64,9 @@
 }
 
 .displayTodoTask:hover .deleteBtn {
+  display: block;
+}
+
+.header:hover .deleteBtn {
   display: block;
 }
