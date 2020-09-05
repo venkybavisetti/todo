@@ -32,9 +32,11 @@
 .todo .statusBox {
   background-color: lightblue;
 }
+
 .doing .statusBox {
   background-color: orange;
 }
+
 .done .statusBox {
   background-color: mediumseagreen;
 }
@@ -63,10 +65,7 @@
   cursor: pointer;
 }
 
-.displayTodoTask:hover .deleteBtn {
-  display: block;
-}
-
+.displayTodoTask:hover .deleteBtn,
 .header:hover .deleteBtn {
   display: block;
 }
