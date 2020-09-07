@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InputBox from './InputBox';
 import TodoTask from './TodoTask';
 import Header from './Header';
@@ -14,74 +14,63 @@ const cloneStructure = function (structure) {
   return structure.map((task) => ({ ...task }));
 };
 
-class Todo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { list: [], header: 'Todo List' };
+const TodoL = function (props) {
+  const [todoList, setTodoList] = useState([]);
+  const [header, setTitle] = useState('Todo List');
 
-    this.createTask = this.createTask.bind(this);
-    this.updateTask = this.updateTask.bind(this);
-    this.updateHeader = this.updateHeader.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
-    this.deleteTasks = this.deleteTasks.bind(this);
-  }
+  const createTask = (text) => {
+    setTodoList((list) => [
+      ...list,
+      { id: generateId(), text, status: getDefaultStatus() },
+    ]);
+  };
 
-  createTask(text) {
-    this.setState(({ list }) => {
-      const newList = cloneStructure(list);
-      newList.push({ id: generateId(), text, status: getDefaultStatus() });
-      return { list: newList };
-    });
-  }
-
-  updateTask(taskId) {
-    this.setState(({ list }) => {
+  const updateTask = (taskId) => {
+    setTodoList((list) => {
       const newList = cloneStructure(list);
       const task = newList.find((task) => task.id === taskId);
       task.status = getNextStatus(task.status);
-      return { list: newList };
+      return newList;
     });
-  }
+  };
 
-  updateHeader(header) {
-    this.setState({ header });
-  }
+  const updateHeader = (header) => {
+    setTitle(header);
+  };
 
-  deleteTask(taskId) {
-    this.setState(({ list }) => {
+  const deleteTask = (taskId) => {
+    setTodoList((list) => {
       const newList = cloneStructure(list);
       const taskIndex = newList.findIndex((task) => task.id === taskId);
       newList.splice(taskIndex, 1);
-      return { list: newList };
+      return newList;
     });
-  }
+  };
 
-  deleteTasks() {
-    this.setState({ list: [] });
-  }
+  const deleteTasks = () => {
+    setTodoList([]);
+  };
 
-  render() {
-    const children = this.state.list.map((task) => (
-      <TodoTask
-        task={task}
-        key={task.id}
-        updateTask={this.updateTask}
-        deleteTask={this.deleteTask}
+  const children = todoList.map((task) => (
+    <TodoTask
+      task={task}
+      key={task.id}
+      updateTask={updateTask}
+      deleteTask={deleteTask}
+    />
+  ));
+
+  return (
+    <div className="todoBox">
+      <Header
+        header={header}
+        onEnter={updateHeader}
+        deleteTasks={deleteTasks}
       />
-    ));
+      {children}
+      <InputBox onEnter={createTask} />
+    </div>
+  );
+};
 
-    return (
-      <div className="todoBox">
-        <Header
-          header={this.state.header}
-          onEnter={this.updateHeader}
-          deleteTasks={this.deleteTasks}
-        />
-        {children}
-        <InputBox onEnter={this.createTask} />
-      </div>
-    );
-  }
-}
-
-export default Todo;
+export default TodoL;
