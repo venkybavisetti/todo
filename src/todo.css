@@ -50,22 +50,24 @@
   margin: 20px 0px;
   font-size: large;
   cursor: pointer;
-  position: relative;
   width: 100%;
 }
 
 .deleteBtn {
-  position: absolute;
-  top: 0px;
-  right: 0;
   color: gray;
   font-weight: 700;
-  margin: 3px 0px;
-  display: none;
+  margin: auto;
   cursor: pointer;
+  display: none;
 }
 
-.displayTodoTask:hover .deleteBtn,
-.header:hover .deleteBtn {
+.container {
+  width: 180px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.container:hover .deleteBtn {
   display: block;
 }

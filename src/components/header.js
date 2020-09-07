@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InputBox from './InputBox';
+import AddDeleteBtn from './DeleteButton';
 
 const Header = (props) => {
   const [isEditMode, setOnEditMode] = useState(false);
@@ -19,11 +20,8 @@ const Header = (props) => {
   return (
     <div className="header">
       <span onClick={() => setOnEditMode(true)}>{props.header}</span>
-      <div className="deleteBtn" onClick={props.deleteTasks}>
-        X
-      </div>
     </div>
   );
 };
 
-export default Header;
+export default AddDeleteBtn(Header);

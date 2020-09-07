@@ -14,7 +14,7 @@ const cloneStructure = function (structure) {
   return structure.map((task) => ({ ...task }));
 };
 
-const TodoL = function (props) {
+const Todo = function (props) {
   const [todoList, setTodoList] = useState([]);
   const [header, setTitle] = useState('Todo List');
 
@@ -62,15 +62,13 @@ const TodoL = function (props) {
 
   return (
     <div className="todoBox">
-      <Header
-        header={header}
-        onEnter={updateHeader}
-        deleteTasks={deleteTasks}
-      />
+      <Header header={header} onEnter={updateHeader} deleteTask={deleteTasks} />
+
       {children}
+
       <InputBox onEnter={createTask} />
     </div>
   );
 };
 
-export default TodoL;
+export default Todo;
