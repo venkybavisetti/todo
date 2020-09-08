@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import InputBox from './InputBox';
 import AddDeleteBtn from './DeleteButton';
 
+const DisplayHeaderText = (props) => (
+  <div className="header">
+    <span onClick={props.editMode}>{props.header}</span>
+  </div>
+);
+
+const HeaderWithDeleteBtn = AddDeleteBtn(DisplayHeaderText);
+
 const Header = (props) => {
   const [isEditMode, setOnEditMode] = useState(false);
 
   const updateHeader = (text) => {
     props.onEnter(text);
     setOnEditMode(false);
+  };
+
+  const editMode = () => {
+    setOnEditMode(true);
   };
 
   if (isEditMode)
@@ -18,10 +30,12 @@ const Header = (props) => {
     );
 
   return (
-    <div className="header">
-      <span onClick={() => setOnEditMode(true)}>{props.header}</span>
-    </div>
+    <HeaderWithDeleteBtn
+      header={props.header}
+      editMode={editMode}
+      deleteTask={props.deleteTask}
+    />
   );
 };
 
-export default AddDeleteBtn(Header);
+export default Header;

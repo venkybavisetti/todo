@@ -1,70 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputBox from './InputBox';
-import TodoTask from './TodoTask';
+import TaskList from './TaskList';
 import Header from './Header';
-import { getNextStatus, getDefaultStatus } from '../statuses';
 import '../todo.css';
-
-const generateId = function () {
-  return Math.floor(Math.random() * Date.now());
-};
-
-const cloneStructure = function (structure) {
-  //JSON.parse(JSON.stringify(structure));
-  return structure.map((task) => ({ ...task }));
-};
+import todoApi from './todoApi';
 
 const Todo = function (props) {
   const [todoList, setTodoList] = useState([]);
-  const [header, setTitle] = useState('Todo List');
+  const [header, setHeader] = useState('');
 
-  const createTask = (text) => {
-    setTodoList((list) => [
-      ...list,
-      { id: generateId(), text, status: getDefaultStatus() },
-    ]);
-  };
-
-  const updateTask = (taskId) => {
-    setTodoList((list) => {
-      const newList = cloneStructure(list);
-      const task = newList.find((task) => task.id === taskId);
-      task.status = getNextStatus(task.status);
-      return newList;
+  const updateTodo = () =>
+    todoApi.getTodo().then(({ todoList, header }) => {
+      setTodoList(todoList);
+      setHeader(header);
     });
+
+  useEffect(() => {
+    updateTodo();
+  }, []);
+
+  const deleteTasks = function () {
+    todoApi.deleteTasks().then(updateTodo);
   };
 
-  const updateHeader = (header) => {
-    setTitle(header);
+  const updateHeader = function (header) {
+    todoApi.updateHeader(header).then(updateTodo);
   };
 
-  const deleteTask = (taskId) => {
-    setTodoList((list) => {
-      const newList = cloneStructure(list);
-      const taskIndex = newList.findIndex((task) => task.id === taskId);
-      newList.splice(taskIndex, 1);
-      return newList;
-    });
+  const updateTask = function (taskId) {
+    todoApi.updateTask(taskId).then(updateTodo);
   };
 
-  const deleteTasks = () => {
-    setTodoList([]);
+  const createTask = function (text) {
+    todoApi.createTask(text).then(updateTodo);
   };
 
-  const children = todoList.map((task) => (
-    <TodoTask
-      task={task}
-      key={task.id}
-      updateTask={updateTask}
-      deleteTask={deleteTask}
-    />
-  ));
+  const deleteTask = function (taskId) {
+    todoApi.deleteTask(taskId).then(updateTodo);
+  };
 
   return (
     <div className="todoBox">
       <Header header={header} onEnter={updateHeader} deleteTask={deleteTasks} />
 
-      {children}
+      <TaskList
+        tasks={todoList}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
 
       <InputBox onEnter={createTask} />
     </div>
