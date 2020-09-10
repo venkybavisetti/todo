@@ -3,7 +3,7 @@ const postReq = (url, data) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
-  });
+  }).then((data) => data.json());
 };
 
 const getTodo = () => fetch('/api/getTodo').then((res) => res.json());

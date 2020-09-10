@@ -9,14 +9,13 @@ const Todo = function (props) {
   const [todoList, setTodoList] = useState([]);
   const [header, setHeader] = useState('');
 
-  const updateTodo = () =>
-    todoApi.getTodo().then(({ todoList, header }) => {
-      setTodoList(todoList);
-      setHeader(header);
-    });
+  const updateTodo = ({ todoList, header }) => {
+    setTodoList(todoList);
+    setHeader(header);
+  };
 
   useEffect(() => {
-    updateTodo();
+    todoApi.getTodo().then(updateTodo);
   }, []);
 
   const deleteTasks = function () {
